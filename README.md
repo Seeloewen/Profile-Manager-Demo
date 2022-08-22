@@ -1,4 +1,4 @@
-# Profile-Manager
+# Profile Manager Demo
 Simple template for creating a Profile Manager in your application.
 
 This initial vesion is a minimal form of the Profile Manager Demo. It already features some custom variables which makes it very easy to customize.
