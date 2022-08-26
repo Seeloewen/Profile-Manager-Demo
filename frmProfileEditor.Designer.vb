@@ -32,7 +32,7 @@ Partial Class frmProfileEditor
         Me.cbxProfile = New System.Windows.Forms.ComboBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblChooseProfile = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.settings = New System.Windows.Forms.RichTextBox()
         Me.gbEditProfile.SuspendLayout()
@@ -141,15 +141,15 @@ Partial Class frmProfileEditor
         Me.btnDelete.Text = "Delete profile"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'Label1
+        'lblChooseProfile
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 13)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(212, 16)
-        Me.Label1.TabIndex = 10
-        Me.Label1.Text = "Choose the profile you want to edit:"
+        Me.lblChooseProfile.AutoSize = True
+        Me.lblChooseProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblChooseProfile.Location = New System.Drawing.Point(12, 13)
+        Me.lblChooseProfile.Name = "lblChooseProfile"
+        Me.lblChooseProfile.Size = New System.Drawing.Size(212, 16)
+        Me.lblChooseProfile.TabIndex = 10
+        Me.lblChooseProfile.Text = "Choose the profile you want to edit:"
         '
         'btnClose
         '
@@ -176,7 +176,7 @@ Partial Class frmProfileEditor
         Me.ClientSize = New System.Drawing.Size(298, 272)
         Me.Controls.Add(Me.settings)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblChooseProfile)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.cbxProfile)
@@ -204,7 +204,7 @@ Partial Class frmProfileEditor
     Friend WithEvents cbxProfile As ComboBox
     Friend WithEvents btnSave As Button
     Friend WithEvents btnDelete As Button
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblChooseProfile As Label
     Friend WithEvents btnClose As Button
     Friend WithEvents settings As RichTextBox
 End Class
