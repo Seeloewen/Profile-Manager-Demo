@@ -26,7 +26,6 @@ Partial Class frmLoadProfileFrom
         Me.cbxProfiles = New System.Windows.Forms.ComboBox()
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.settings = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
         'lblLoadProfileFrom
@@ -42,14 +41,16 @@ Partial Class frmLoadProfileFrom
         'cbxProfiles
         '
         Me.cbxProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxProfiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxProfiles.FormattingEnabled = True
-        Me.cbxProfiles.Location = New System.Drawing.Point(15, 29)
+        Me.cbxProfiles.Location = New System.Drawing.Point(15, 33)
         Me.cbxProfiles.Name = "cbxProfiles"
-        Me.cbxProfiles.Size = New System.Drawing.Size(347, 21)
+        Me.cbxProfiles.Size = New System.Drawing.Size(347, 24)
         Me.cbxProfiles.TabIndex = 1
         '
         'btnLoad
         '
+        Me.btnLoad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLoad.Location = New System.Drawing.Point(138, 67)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(109, 23)
@@ -59,6 +60,7 @@ Partial Class frmLoadProfileFrom
         '
         'btnCancel
         '
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Location = New System.Drawing.Point(253, 67)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(109, 23)
@@ -66,21 +68,12 @@ Partial Class frmLoadProfileFrom
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'settings
-        '
-        Me.settings.Location = New System.Drawing.Point(15, 116)
-        Me.settings.Name = "settings"
-        Me.settings.Size = New System.Drawing.Size(347, 31)
-        Me.settings.TabIndex = 5
-        Me.settings.Text = ""
-        '
         'frmLoadProfileFrom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(374, 105)
-        Me.Controls.Add(Me.settings)
+        Me.ClientSize = New System.Drawing.Size(374, 102)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLoad)
         Me.Controls.Add(Me.cbxProfiles)
@@ -100,5 +93,4 @@ Partial Class frmLoadProfileFrom
     Friend WithEvents cbxProfiles As ComboBox
     Friend WithEvents btnLoad As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents settings As RichTextBox
 End Class

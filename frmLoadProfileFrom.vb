@@ -3,7 +3,7 @@
 Public Class frmLoadProfileFrom
 
     'Variables used by the application to work correctly
-    Dim ProfileDirectory As String = frmMain.AppData + "\Profile Manager Demo\Profiles" 'This is the directory, where the profile files are being stored
+    Dim ProfileDirectory As String = frmMain.AppData + "\Profile Manager Demo\Profiles\" 'This is the directory, where the profile files are being stored
     Dim ProfileList As String()
     Dim ProfileContent As String()
     Dim LoadFromProfile As String
@@ -15,7 +15,7 @@ Public Class frmLoadProfileFrom
 
     Private Sub frmLoadProfileFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Checks if the profile directory exists. If yes, it clears the combobox to avoid duplicates and it starts getting all available profiles, see method below
-        If My.Computer.FileSystem.DirectoryExists(frmMain.AppData + "\Profile Manager Demo\Profiles") Then
+        If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) Then
             cbxProfiles.Items.Clear()
             GetFiles(ProfileDirectory)
         Else
@@ -36,7 +36,7 @@ Public Class frmLoadProfileFrom
                 If Directory.Exists(Profile) Then
                     GetFiles(Profile)
                 Else
-                    Profile = Profile.Replace(frmMain.AppData + "\Profile Manager Demo\Profiles\", "")
+                    Profile = Profile.Replace(ProfileDirectory, "")
                     Profile = Profile.Replace(".txt", "")
                     cbxProfiles.Items.Add(Profile)
                 End If
@@ -60,7 +60,7 @@ Public Class frmLoadProfileFrom
         'Checks if a profile is selected. It then reads the content of the profile file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
         'It then starts to convert and load the profile, see the the method below.
         If String.IsNullOrEmpty(Profile) = False Then
-            LoadFromProfile = frmMain.AppData + "\SealSync\Profiles\" + Profile + ".txt"
+            LoadFromProfile = ProfileDirectory + Profile + ".txt"
             ProfileContent = File.ReadAllLines(LoadFromProfile)
             ReDim Preserve ProfileContent(4)
             CheckAndConvertProfile(Profile, ShowMessage)
@@ -91,7 +91,7 @@ Public Class frmLoadProfileFrom
                         ProfileContent(3) = "Placeholder"
                     End If
                     LoadProfile(Profile, False)
-                    frmSaveProfileAs.UpdateProfile(Profile)
+                    'frmSaveProfileAs.UpdateProfile(Profile)
                     MsgBox("Loaded and updated profile. It should now work correctly!", MsgBoxStyle.Information, "Loaded and updated profile")
                 Case Windows.Forms.DialogResult.No
                     MsgBox("Cancelled loading profile.", MsgBoxStyle.Exclamation, "Warning")
@@ -103,7 +103,7 @@ Public Class frmLoadProfileFrom
 
     Public Sub LoadProfile(Profile As String, ShowMessage As Boolean) 'This contains examples for loading different elements. Of course, you can use your own methods here.
         'Example for loading a radiobutton. The file stores which button is checked as a string, which is checked here. Depending on the string, a radiobutton will be selected.
-        rbtn = settings.Lines(0)
+        rbtn = ProfileContent(0)
         If rbtn = "rbtn1" Then
             frmMain.rbtn1.Checked = True
         ElseIf rbtn = "rbtn2" Then
@@ -113,13 +113,13 @@ Public Class frmLoadProfileFrom
         End If
 
         'Examples for loading checkboxes. Same concept like the radiobuttons, the file stores if the button is checked or not and gets checked depending on the string when being loaded.
-        cb1 = settings.Lines(1)
+        cb1 = ProfileContent(1)
         If cb1 = "cb1Checked" Then
             frmMain.cb1.Checked = True
         ElseIf cb1 = "cb1NotChecked" Then
             frmMain.cb1.Checked = False
         End If
-        cb2 = settings.Lines(2)
+        cb2 = ProfileContent(2)
         If cb2 = "cb2Checked" Then
             frmMain.cb2.Checked = True
         ElseIf cb2 = "cb2NotChecked" Then
@@ -127,7 +127,7 @@ Public Class frmLoadProfileFrom
         End If
 
         'Example for loading a string (like a textbox)
-        frmMain.tb1.Text = settings.Lines(3)
+        frmMain.tb1.Text = ProfileContent(3)
 
         'If ShowMessage is enabled, it will show a messagebox when loading completes.
         If ShowMessage Then
