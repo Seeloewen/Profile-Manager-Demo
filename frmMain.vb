@@ -4,8 +4,10 @@ Public Class frmMain
 
     'Variables used by the software to work correctly
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Dim ProfileDirectory As String = AppData + "\Profile Manager Demo\Profiles\"
+    Public ProfileDirectory As String = AppData + "\Profile Manager Demo\Profiles\"
     Dim ProfileList As String()
+
+    '-- Event handlers --
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Check if profile directory exists, if not, create it
