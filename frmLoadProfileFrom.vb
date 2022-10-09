@@ -91,7 +91,7 @@ Public Class frmLoadProfileFrom
                         ProfileContent(3) = "Placeholder"
                     End If
                     LoadProfile(Profile, False)
-                    'frmSaveProfileAs.UpdateProfile(Profile)
+                    frmSaveProfileAs.UpdateProfile(Profile)
                     MsgBox("Loaded and updated profile. It should now work correctly!", MsgBoxStyle.Information, "Loaded and updated profile")
                 Case Windows.Forms.DialogResult.No
                     MsgBox("Cancelled loading profile.", MsgBoxStyle.Exclamation, "Warning")
