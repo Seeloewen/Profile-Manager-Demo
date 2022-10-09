@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Werte der Assemblyattribute überprüfen
 
-<Assembly: AssemblyTitle("Profile Manager")>
-<Assembly: AssemblyDescription("Profile Manager Demo")>
+<Assembly: AssemblyTitle("Profile Manager Demo")>
+<Assembly: AssemblyDescription("Simple Template for a Profile Manager")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("Profile Manager")>
+<Assembly: AssemblyProduct("Profile Manager Demo")>
 <Assembly: AssemblyCopyright("Copyright ©  2022 Seeloewen")>
 <Assembly: AssemblyTrademark("")>
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("22.10.09.2250")>
 <Assembly: AssemblyFileVersion("1.0.0.0")>
