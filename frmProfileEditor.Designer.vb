@@ -24,10 +24,10 @@ Partial Class frmProfileEditor
     Private Sub InitializeComponent()
         Me.gbEditProfile = New System.Windows.Forms.GroupBox()
         Me.tb1s = New System.Windows.Forms.TextBox()
-        Me.rbtn1 = New System.Windows.Forms.RadioButton()
+        Me.rbtn1s = New System.Windows.Forms.RadioButton()
         Me.cb1s = New System.Windows.Forms.CheckBox()
-        Me.rbtn2 = New System.Windows.Forms.RadioButton()
-        Me.rbtn3 = New System.Windows.Forms.RadioButton()
+        Me.rbtn2s = New System.Windows.Forms.RadioButton()
+        Me.rbtn3s = New System.Windows.Forms.RadioButton()
         Me.cb2s = New System.Windows.Forms.CheckBox()
         Me.cbxProfile = New System.Windows.Forms.ComboBox()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -41,11 +41,12 @@ Partial Class frmProfileEditor
         'gbEditProfile
         '
         Me.gbEditProfile.Controls.Add(Me.tb1s)
-        Me.gbEditProfile.Controls.Add(Me.rbtn1)
+        Me.gbEditProfile.Controls.Add(Me.rbtn1s)
         Me.gbEditProfile.Controls.Add(Me.cb1s)
-        Me.gbEditProfile.Controls.Add(Me.rbtn2)
-        Me.gbEditProfile.Controls.Add(Me.rbtn3)
+        Me.gbEditProfile.Controls.Add(Me.rbtn2s)
+        Me.gbEditProfile.Controls.Add(Me.rbtn3s)
         Me.gbEditProfile.Controls.Add(Me.cb2s)
+        Me.gbEditProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbEditProfile.Location = New System.Drawing.Point(11, 59)
         Me.gbEditProfile.Name = "gbEditProfile"
         Me.gbEditProfile.Size = New System.Drawing.Size(267, 145)
@@ -57,59 +58,59 @@ Partial Class frmProfileEditor
         '
         Me.tb1s.Location = New System.Drawing.Point(24, 106)
         Me.tb1s.Name = "tb1s"
-        Me.tb1s.Size = New System.Drawing.Size(221, 20)
+        Me.tb1s.Size = New System.Drawing.Size(221, 22)
         Me.tb1s.TabIndex = 6
         '
-        'rbtn1
+        'rbtn1s
         '
-        Me.rbtn1.AutoSize = True
-        Me.rbtn1.Checked = True
-        Me.rbtn1.Location = New System.Drawing.Point(24, 29)
-        Me.rbtn1.Name = "rbtn1"
-        Me.rbtn1.Size = New System.Drawing.Size(65, 17)
-        Me.rbtn1.TabIndex = 2
-        Me.rbtn1.TabStop = True
-        Me.rbtn1.Text = "Option 1"
-        Me.rbtn1.UseVisualStyleBackColor = True
+        Me.rbtn1s.AutoSize = True
+        Me.rbtn1s.Checked = True
+        Me.rbtn1s.Location = New System.Drawing.Point(24, 29)
+        Me.rbtn1s.Name = "rbtn1s"
+        Me.rbtn1s.Size = New System.Drawing.Size(74, 20)
+        Me.rbtn1s.TabIndex = 2
+        Me.rbtn1s.TabStop = True
+        Me.rbtn1s.Text = "Option 1"
+        Me.rbtn1s.UseVisualStyleBackColor = True
         '
         'cb1s
         '
         Me.cb1s.AutoSize = True
         Me.cb1s.Location = New System.Drawing.Point(24, 69)
         Me.cb1s.Name = "cb1s"
-        Me.cb1s.Size = New System.Drawing.Size(53, 17)
+        Me.cb1s.Size = New System.Drawing.Size(59, 20)
         Me.cb1s.TabIndex = 0
         Me.cb1s.Text = "Box 1"
         Me.cb1s.UseVisualStyleBackColor = True
         '
-        'rbtn2
+        'rbtn2s
         '
-        Me.rbtn2.AutoSize = True
-        Me.rbtn2.Location = New System.Drawing.Point(99, 29)
-        Me.rbtn2.Name = "rbtn2"
-        Me.rbtn2.Size = New System.Drawing.Size(65, 17)
-        Me.rbtn2.TabIndex = 4
-        Me.rbtn2.TabStop = True
-        Me.rbtn2.Text = "Option 2"
-        Me.rbtn2.UseVisualStyleBackColor = True
+        Me.rbtn2s.AutoSize = True
+        Me.rbtn2s.Location = New System.Drawing.Point(99, 29)
+        Me.rbtn2s.Name = "rbtn2s"
+        Me.rbtn2s.Size = New System.Drawing.Size(74, 20)
+        Me.rbtn2s.TabIndex = 4
+        Me.rbtn2s.TabStop = True
+        Me.rbtn2s.Text = "Option 2"
+        Me.rbtn2s.UseVisualStyleBackColor = True
         '
-        'rbtn3
+        'rbtn3s
         '
-        Me.rbtn3.AutoSize = True
-        Me.rbtn3.Location = New System.Drawing.Point(180, 29)
-        Me.rbtn3.Name = "rbtn3"
-        Me.rbtn3.Size = New System.Drawing.Size(65, 17)
-        Me.rbtn3.TabIndex = 3
-        Me.rbtn3.TabStop = True
-        Me.rbtn3.Text = "Option 3"
-        Me.rbtn3.UseVisualStyleBackColor = True
+        Me.rbtn3s.AutoSize = True
+        Me.rbtn3s.Location = New System.Drawing.Point(180, 29)
+        Me.rbtn3s.Name = "rbtn3s"
+        Me.rbtn3s.Size = New System.Drawing.Size(74, 20)
+        Me.rbtn3s.TabIndex = 3
+        Me.rbtn3s.TabStop = True
+        Me.rbtn3s.Text = "Option 3"
+        Me.rbtn3s.UseVisualStyleBackColor = True
         '
         'cb2s
         '
         Me.cb2s.AutoSize = True
         Me.cb2s.Location = New System.Drawing.Point(99, 69)
         Me.cb2s.Name = "cb2s"
-        Me.cb2s.Size = New System.Drawing.Size(53, 17)
+        Me.cb2s.Size = New System.Drawing.Size(59, 20)
         Me.cb2s.TabIndex = 1
         Me.cb2s.Text = "Box 2"
         Me.cb2s.UseVisualStyleBackColor = True
@@ -117,14 +118,16 @@ Partial Class frmProfileEditor
         'cbxProfile
         '
         Me.cbxProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxProfile.FormattingEnabled = True
-        Me.cbxProfile.Location = New System.Drawing.Point(12, 32)
+        Me.cbxProfile.Location = New System.Drawing.Point(12, 29)
         Me.cbxProfile.Name = "cbxProfile"
-        Me.cbxProfile.Size = New System.Drawing.Size(266, 21)
+        Me.cbxProfile.Size = New System.Drawing.Size(266, 24)
         Me.cbxProfile.TabIndex = 7
         '
         'btnSave
         '
+        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Location = New System.Drawing.Point(11, 210)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(131, 23)
@@ -134,6 +137,7 @@ Partial Class frmProfileEditor
         '
         'btnDelete
         '
+        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.Location = New System.Drawing.Point(147, 210)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(131, 23)
@@ -145,7 +149,7 @@ Partial Class frmProfileEditor
         '
         Me.lblChooseProfile.AutoSize = True
         Me.lblChooseProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblChooseProfile.Location = New System.Drawing.Point(12, 13)
+        Me.lblChooseProfile.Location = New System.Drawing.Point(12, 10)
         Me.lblChooseProfile.Name = "lblChooseProfile"
         Me.lblChooseProfile.Size = New System.Drawing.Size(212, 16)
         Me.lblChooseProfile.TabIndex = 10
@@ -153,6 +157,7 @@ Partial Class frmProfileEditor
         '
         'btnClose
         '
+        Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.Location = New System.Drawing.Point(84, 239)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(126, 23)
@@ -173,7 +178,7 @@ Partial Class frmProfileEditor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(298, 272)
+        Me.ClientSize = New System.Drawing.Size(290, 272)
         Me.Controls.Add(Me.settings)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.lblChooseProfile)
@@ -196,10 +201,10 @@ Partial Class frmProfileEditor
 
     Friend WithEvents gbEditProfile As GroupBox
     Friend WithEvents tb1s As TextBox
-    Friend WithEvents rbtn1 As RadioButton
+    Friend WithEvents rbtn1s As RadioButton
     Friend WithEvents cb1s As CheckBox
-    Friend WithEvents rbtn2 As RadioButton
-    Friend WithEvents rbtn3 As RadioButton
+    Friend WithEvents rbtn2s As RadioButton
+    Friend WithEvents rbtn3s As RadioButton
     Friend WithEvents cb2s As CheckBox
     Friend WithEvents cbxProfile As ComboBox
     Friend WithEvents btnSave As Button
