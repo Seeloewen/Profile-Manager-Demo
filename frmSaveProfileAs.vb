@@ -57,18 +57,18 @@
         'It will then create a text file with the name set in ProfileName and write the content of the variable to the file.
         'It sill show an error if ProfileName is empty or ProfileDirectory doesn't exist.
         If String.IsNullOrEmpty(ProfileName) = False Then
-            If My.Computer.FileSystem.DirectoryExists(frmMain.AppData + "\Profile Manager Demo\Profiles") Then
-                If My.Computer.FileSystem.FileExists(frmMain.AppData + "\Profile Manager Demo\Profiles\" + ProfileName + ".txt") Then
+            If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
+                If My.Computer.FileSystem.FileExists(frmMain.ProfileDirectory + ProfileName + ".txt") Then
                     Select Case MessageBox.Show("A profile with this name already exists. Do you want to override it?", "Profile already exists", MessageBoxButtons.YesNo)
                         Case Windows.Forms.DialogResult.Yes
-                            My.Computer.FileSystem.WriteAllText(frmMain.AppData + "\Profile Manager Demo\Profiles\" + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
+                            My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
                             MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
                             Close()
                         Case Windows.Forms.DialogResult.No
                             MsgBox("Profile was not overwritten. Please select a different profile name.", MsgBoxStyle.Exclamation, "Profile not overwritten.")
                     End Select
                 Else
-                    My.Computer.FileSystem.WriteAllText(frmMain.AppData + "\Profile Manager Demo\Profiles\" + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
+                    My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
                     MsgBox("Profile was saved.", MsgBoxStyle.Information, "Saved")
                     Close()
                 End If

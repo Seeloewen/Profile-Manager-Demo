@@ -1,12 +1,15 @@
 ﻿Imports System.IO
 
+'This code should be implemented in your applications settings
+
 Public Class frmSettings
 
     'Variables used by the application to work correctly
     Dim ProfileDirectory As String = frmMain.AppData + "\Profile Manager Demo\Profiles\" 'This is the directory, where the profile files are being stored
     Dim ProfileList As String()
 
-    'This code should be implemented in your applications settings
+    '-- Event Handlers --
+
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Check checkbox depending on default profile setting
         If My.Settings.LoadProfileByDefault Then
@@ -43,6 +46,8 @@ Public Class frmSettings
         MsgBox("Saved settings!")
         Close()
     End Sub
+
+    '-- Custom Methods --
 
     Sub GetFiles(Path As String)
         'Gets all the profile files from the directory and puts their name into the combobox

@@ -8,7 +8,6 @@ Public Class frmMain
     Dim ProfileList As String()
 
     '-- Event handlers --
-
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Check if profile directory exists, if not, create it
         If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) = False Then

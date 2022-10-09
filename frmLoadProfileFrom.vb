@@ -3,7 +3,6 @@
 Public Class frmLoadProfileFrom
 
     'Variables used by the application to work correctly
-    Dim ProfileDirectory As String = frmMain.AppData + "\Profile Manager Demo\Profiles\" 'This is the directory, where the profile files are being stored
     Dim ProfileList As String()
     Dim ProfileContent As String()
     Dim LoadFromProfile As String
@@ -13,15 +12,28 @@ Public Class frmLoadProfileFrom
     Dim cb2 As String
     Dim tb1 As String
 
+    '-- Event Handlers --
     Private Sub frmLoadProfileFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Checks if the profile directory exists. If yes, it clears the combobox to avoid duplicates and it starts getting all available profiles, see method below
-        If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) Then
+        If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
             cbxProfiles.Items.Clear()
-            GetFiles(ProfileDirectory)
+            GetFiles(frmMain.ProfileDirectory)
         Else
             MsgBox("Error: Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        'Closes the load window
+        Close()
+    End Sub
+
+    Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
+        'Starts the whole loading process
+        InitializeLoadingProfile(cbxProfiles.SelectedItem, True)
+    End Sub
+
+    '-- Custom Methods --
 
     Sub GetFiles(Path As String)
         'Gets all the profile files from the directory and puts their name into the combobox
@@ -36,7 +48,7 @@ Public Class frmLoadProfileFrom
                 If Directory.Exists(Profile) Then
                     GetFiles(Profile)
                 Else
-                    Profile = Profile.Replace(ProfileDirectory, "")
+                    Profile = Profile.Replace(Path, "")
                     Profile = Profile.Replace(".txt", "")
                     cbxProfiles.Items.Add(Profile)
                 End If
@@ -46,21 +58,11 @@ Public Class frmLoadProfileFrom
         End Try
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        'Closes the load window
-        Close()
-    End Sub
-
-    Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
-        'Starts the whole loading process
-        InitializeLoadingProfile(cbxProfiles.SelectedItem, True)
-    End Sub
-
     Public Sub InitializeLoadingProfile(Profile As String, ShowMessage As Boolean)
         'Checks if a profile is selected. It then reads the content of the profile file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
         'It then starts to convert and load the profile, see the the method below.
         If String.IsNullOrEmpty(Profile) = False Then
-            LoadFromProfile = ProfileDirectory + Profile + ".txt"
+            LoadFromProfile = frmMain.ProfileDirectory + Profile + ".txt"
             ProfileContent = File.ReadAllLines(LoadFromProfile)
             ReDim Preserve ProfileContent(4)
             CheckAndConvertProfile(Profile, ShowMessage)
