@@ -39,8 +39,9 @@ Public Class frmSettings
         'Change default profile to combobox selection
         My.Settings.DefaultProfile = cbxDefaultProfile.SelectedItem
 
-        'Show messagebox to confirm save
+        'Show messagebox to confirm save and close settings
         MsgBox("Saved settings!")
+        Close()
     End Sub
 
     Sub GetFiles(Path As String)
