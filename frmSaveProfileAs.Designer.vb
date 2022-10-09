@@ -40,13 +40,15 @@ Partial Class frmSaveProfileAs
         '
         'tbSaveProfileAs
         '
+        Me.tbSaveProfileAs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbSaveProfileAs.Location = New System.Drawing.Point(17, 36)
         Me.tbSaveProfileAs.Name = "tbSaveProfileAs"
-        Me.tbSaveProfileAs.Size = New System.Drawing.Size(338, 20)
+        Me.tbSaveProfileAs.Size = New System.Drawing.Size(338, 22)
         Me.tbSaveProfileAs.TabIndex = 1
         '
         'btnSave
         '
+        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Location = New System.Drawing.Point(131, 67)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(109, 23)
@@ -56,6 +58,7 @@ Partial Class frmSaveProfileAs
         '
         'btnCancel
         '
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Location = New System.Drawing.Point(246, 67)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(109, 23)
