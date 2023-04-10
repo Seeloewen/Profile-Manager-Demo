@@ -1,5 +1,8 @@
 ﻿Public Class frmSaveProfileAs
 
+    'Variables used by the software to work correctly
+    Dim messageboxStrings As New messageboxStrings
+
     'Variables that store profile content
     Dim rbtn As String
     Dim cb1 As String
@@ -8,6 +11,9 @@
 
     '-- Event handlers --
     Private Sub frmSaveProfileAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Load translations
+        LoadTranslations()
+
         'Clear profile name textbox
         tbSaveProfileAs.Clear()
     End Sub
@@ -55,28 +61,28 @@
 
         'Saves the profile. It checks if the profile already exists or not. If it exists, it will show a warning, otherwise it will not.
         'It will then create a text file with the name set in ProfileName and write the content of the variable to the file.
-        'It sill show an error if ProfileName is empty or ProfileDirectory doesn't exist.
+        'It will show an error if ProfileName is empty or ProfileDirectory doesn't exist.
         If String.IsNullOrEmpty(ProfileName) = False Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
                 If My.Computer.FileSystem.FileExists(frmMain.ProfileDirectory + ProfileName + ".txt") Then
-                    Select Case MsgBox("A profile with this name already exists. Do you want to override it?", vbQuestion + vbYesNo, "Profile already exists")
+                    Select Case MsgBox(messageboxStrings.returnMessageboxString("questionProfileNameAlreadyExists", frmMain.Language), vbQuestion + vbYesNo, "Profile already exists")
                         Case Windows.Forms.DialogResult.Yes
                             My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
-                            MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
+                            MsgBox(messageboxStrings.returnMessageboxString("infoProfileOverwrittenAndSaved", frmMain.Language), MsgBoxStyle.Information, "Overwritten and saved")
                             Close()
                         Case Windows.Forms.DialogResult.No
-                            MsgBox("Profile was not overwritten. Please select a different profile name.", MsgBoxStyle.Exclamation, "Profile not overwritten.")
+                            MsgBox(messageboxStrings.returnMessageboxString("infoProfileNotOverwritten", frmMain.Language), MsgBoxStyle.Exclamation, "Profile Not overwritten.")
                     End Select
                 Else
                     My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
-                    MsgBox("Profile was saved.", MsgBoxStyle.Information, "Saved")
+                    MsgBox(messageboxStrings.returnMessageboxString("infoProfileSaved", frmMain.Language), MsgBoxStyle.Information, "Saved")
                     Close()
                 End If
             Else
-                MsgBox("Error: Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
+                MsgBox(messageboxStrings.returnMessageboxString("errorProfileDirectoryDoesNotExist", frmMain.Language), MsgBoxStyle.Critical, "Error")
             End If
         Else
-            MsgBox("Error: Profile name is empty. Please enter a profile name.", MsgBoxStyle.Critical, "Error")
+            MsgBox(messageboxStrings.returnMessageboxString("errorProfileNameIsEmpty", frmMain.Language), MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
@@ -114,10 +120,20 @@
             If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
                 My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
             Else
-                MsgBox("Error: Couldn't update profile. Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
+                MsgBox(messageboxStrings.returnMessageboxString("errorProfileDirectoryDoesNotExist", frmMain.Language), MsgBoxStyle.Critical, "Error")
             End If
         Else
-            MsgBox("Error: Couldn't update profile as the name is empty.", MsgBoxStyle.Critical, "Error")
+            MsgBox(messageboxStrings.returnMessageboxString("errorCouldntUpdateEmptyProfileName", frmMain.Language), MsgBoxStyle.Critical, "Error")
+        End If
+    End Sub
+
+    Private Sub LoadTranslations()
+        'Load German translations
+        If frmMain.Language = "German" Then
+            lblSaveProfileAs.Text = "Profil speichern als..."
+            btnSave.Text = "Speichern"
+            btnCancel.Text = "Abbrechen"
+            Text = "Profil speichern als..."
         End If
     End Sub
 End Class

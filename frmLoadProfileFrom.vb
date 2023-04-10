@@ -6,20 +6,27 @@ Public Class frmLoadProfileFrom
     Dim ProfileList As String()
     Dim ProfileContent As String()
     Dim LoadFromProfile As String
+    Dim messageboxStrings As New messageboxStrings
+
     'Placeholders used for loading the settings
     Dim rbtn As String
     Dim cb1 As String
     Dim cb2 As String
     Dim tb1 As String
 
+
+
     '-- Event Handlers --
     Private Sub frmLoadProfileFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Load translations
+        LoadTranslations()
+
         'Checks if the profile directory exists. If yes, it clears the combobox to avoid duplicates and it starts getting all available profiles, see method below
         If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
             cbxProfiles.Items.Clear()
             GetFiles(frmMain.ProfileDirectory)
         Else
-            MsgBox("Error: Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
+            MsgBox(messageboxStrings.returnMessageboxString("errorProfileDirectoryDoesNotExist", frmMain.Language), MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
@@ -54,7 +61,7 @@ Public Class frmLoadProfileFrom
                 End If
             Next
         Catch ex As Exception
-            MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            MsgBox(messageboxStrings.returnMessageboxString("errorLoadingProfilesFailed", frmMain.Language) + vbNewLine + "Exception: " + ex.Message)
         End Try
     End Sub
 
@@ -68,7 +75,7 @@ Public Class frmLoadProfileFrom
             CheckAndConvertProfile(Profile, ShowMessage)
             Close()
         Else
-            MsgBox("Error: No profile selected. Please select a profile to load from.", MsgBoxStyle.Critical, "Error")
+            MsgBox(messageboxStrings.returnMessageboxString("errorNoProfileSelected", frmMain.Language), MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
@@ -78,25 +85,25 @@ Public Class frmLoadProfileFrom
         'If a line is empty, it will fill that line with a placeholder in the array so the profile can get loaded without errors. After loading the profile, it gets automatically saved so the corrupted/old settings file gets fixed.
         'If no required line is empty and the file is fine, it will just load the profile like normal.
         If (String.IsNullOrEmpty(ProfileContent(0)) OrElse String.IsNullOrEmpty(ProfileContent(1)) OrElse String.IsNullOrEmpty(ProfileContent(2)) OrElse String.IsNullOrEmpty(3)) Then
-            Select Case MsgBox("You are trying to load a profile from an older version or a corrupted profile. You need to update it in order to load it. You usually won't lose any settings. Do you want to continue?", vbQuestion + vbYesNo, "Load old or corrupted profile")
+            Select Case MsgBox(messageboxStrings.returnMessageboxString("questionLoadOldOrCorruptedProfile", frmMain.Language), vbQuestion + vbYesNo, "Load old or corrupted profile")
                 Case Windows.Forms.DialogResult.Yes
-                    If String.IsNullOrEmpty(ProfileContent(0)) Then
-                        ProfileContent(0) = "rbtn1"
-                    End If
-                    If String.IsNullOrEmpty(ProfileContent(1)) Then
-                        ProfileContent(1) = "cb1Checked"
-                    End If
-                    If String.IsNullOrEmpty(ProfileContent(2)) Then
-                        ProfileContent(2) = "cb2NotChecked"
-                    End If
-                    If String.IsNullOrEmpty(ProfileContent(3)) Then
-                        ProfileContent(3) = "Placeholder"
-                    End If
-                    LoadProfile(Profile, False)
-                    frmSaveProfileAs.UpdateProfile(Profile)
-                    MsgBox("Loaded and updated profile. It should now work correctly!", MsgBoxStyle.Information, "Loaded and updated profile")
+            If String.IsNullOrEmpty(ProfileContent(0)) Then
+                ProfileContent(0) = "rbtn1"
+            End If
+            If String.IsNullOrEmpty(ProfileContent(1)) Then
+                ProfileContent(1) = "cb1Checked"
+            End If
+            If String.IsNullOrEmpty(ProfileContent(2)) Then
+                ProfileContent(2) = "cb2NotChecked"
+            End If
+            If String.IsNullOrEmpty(ProfileContent(3)) Then
+                ProfileContent(3) = "Placeholder"
+            End If
+            LoadProfile(Profile, False)
+            frmSaveProfileAs.UpdateProfile(Profile)
+            MsgBox(messageboxStrings.returnMessageboxString("infoLoadedAndUpdatedProfile", frmMain.Language), MsgBoxStyle.Information, "Loaded And updated profile")
                 Case Windows.Forms.DialogResult.No
-                    MsgBox("Cancelled loading profile.", MsgBoxStyle.Exclamation, "Warning")
+                    MsgBox(messageboxStrings.returnMessageboxString("infoCancelledLoadingProfiles", frmMain.Language), MsgBoxStyle.Exclamation, "Warning")
             End Select
         Else
             LoadProfile(Profile, ShowMessage)
@@ -134,6 +141,16 @@ Public Class frmLoadProfileFrom
         'If ShowMessage is enabled, it will show a messagebox when loading completes.
         If ShowMessage Then
             MsgBox("Loaded profile " + Profile + ".", MsgBoxStyle.Information, "Loaded profile")
+        End If
+    End Sub
+
+    Private Sub LoadTranslations()
+        'Load German translation
+        If frmMain.Language = "German" Then
+            lblLoadProfileFrom.Text = "Profil laden von..."
+            btnLoad.Text = "Laden"
+            btnCancel.Text = "Schließen"
+            Text = "Profil laden von..."
         End If
     End Sub
 End Class

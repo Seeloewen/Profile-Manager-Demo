@@ -26,6 +26,7 @@ Partial Class frmSettings
         Me.cbLoadProfileByDefault = New System.Windows.Forms.CheckBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnToggleLanguage = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cbxDefaultProfile
@@ -51,7 +52,7 @@ Partial Class frmSettings
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(147, 70)
+        Me.btnCancel.Location = New System.Drawing.Point(147, 109)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(133, 23)
         Me.btnCancel.TabIndex = 13
@@ -61,19 +62,30 @@ Partial Class frmSettings
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(12, 70)
+        Me.btnSave.Location = New System.Drawing.Point(12, 109)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(129, 23)
         Me.btnSave.TabIndex = 14
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'btnToggleLanguage
+        '
+        Me.btnToggleLanguage.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnToggleLanguage.Location = New System.Drawing.Point(12, 80)
+        Me.btnToggleLanguage.Name = "btnToggleLanguage"
+        Me.btnToggleLanguage.Size = New System.Drawing.Size(267, 23)
+        Me.btnToggleLanguage.TabIndex = 15
+        Me.btnToggleLanguage.Text = "Toggle language"
+        Me.btnToggleLanguage.UseVisualStyleBackColor = True
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(292, 105)
+        Me.ClientSize = New System.Drawing.Size(292, 143)
+        Me.Controls.Add(Me.btnToggleLanguage)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.cbxDefaultProfile)
@@ -93,4 +105,5 @@ Partial Class frmSettings
     Friend WithEvents cbLoadProfileByDefault As CheckBox
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnSave As Button
+    Friend WithEvents btnToggleLanguage As Button
 End Class
