@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Simple Template for a Profile Manager")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("Profile Manager Demo")>
-<Assembly: AssemblyCopyright("Copyright ©  2022 Seeloewen")>
+<Assembly: AssemblyCopyright("Copyright © 2023 Seeloewen")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("22.11.03.0100")>
+<Assembly: AssemblyVersion("23.04.10.0447")>
 <Assembly: AssemblyFileVersion("1.0.0.0")>
