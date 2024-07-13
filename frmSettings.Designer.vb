@@ -106,7 +106,7 @@ Partial Class frmSettings
         '
         Me.cbxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxLanguage.FormattingEnabled = True
-        Me.cbxLanguage.Items.AddRange(New Object() {"German (Deutsch)", "English (Englisch)"})
+        Me.cbxLanguage.Items.AddRange(New Object() {"System Default (Systemstandard)", "German (Deutsch)", "English (Englisch)"})
         Me.cbxLanguage.Location = New System.Drawing.Point(12, 153)
         Me.cbxLanguage.Name = "cbxLanguage"
         Me.cbxLanguage.Size = New System.Drawing.Size(268, 21)

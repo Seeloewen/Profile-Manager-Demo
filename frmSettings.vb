@@ -24,10 +24,12 @@ Public Class frmSettings
         End If
 
         'Check checkbox depending on language setting
-        If My.Settings.Language = "German" Then
+        If My.Settings.Language = "System Default" Then
             cbxLanguage.SelectedIndex = 0
-        ElseIf My.Settings.Language = "English" Then
+        ElseIf My.Settings.Language = "German" Then
             cbxLanguage.SelectedIndex = 1
+        ElseIf My.Settings.Language = "English" Then
+            cbxLanguage.SelectedIndex = 2
         End If
 
         'Check checkbox depending on design setting
@@ -65,9 +67,12 @@ Public Class frmSettings
 
         'Change language based on selection
         If cbxLanguage.SelectedIndex = 0 Then
+            frmMain.Language = frmMain.GetLanguage()
+            My.Settings.Language = "System Default"
+        ElseIf cbxLanguage.SelectedIndex = 1 Then
             frmMain.Language = "German"
             My.Settings.Language = "German"
-        ElseIf cbxLanguage.SelectedIndex = 1 Then
+        ElseIf cbxLanguage.SelectedIndex = 2 Then
             frmMain.Language = "English"
             My.Settings.Language = "English"
         End If

@@ -14,7 +14,7 @@ Public Class frmMain
     '-- Event handlers --
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load language
-        Language = My.Settings.Language
+        Language = GetLanguage()
         Design = GetDesign()
         LoadTranslations()
         LoadDesign()
@@ -105,6 +105,27 @@ Public Class frmMain
         'If everything fails, use 'light' as fallback design
         Return "Light"
     End Function
+
+    Public Function GetLanguage() As String
+        'If the 'System Default' option is checked, it has to check the OS for the design
+        If My.Settings.Language = "System Default" Then
+            'Check registry key for Windows System Language to get current language
+            Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InstalledUICulture
+            Dim lang As String = culture.TwoLetterISOLanguageName
+            If lang = "en" Then
+                Return "English"
+            ElseIf lang = "de" Then
+                Return "German"
+            End If
+        Else
+            'If not, it can just use the settings string
+            Return My.Settings.Language
+        End If
+
+        'If everything fails, use 'light' as fallback design
+        Return "English"
+    End Function
+
 
     Private Sub LoadDesign()
         If Design = "Dark" Then
