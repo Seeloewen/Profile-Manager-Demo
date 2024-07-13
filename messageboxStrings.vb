@@ -39,7 +39,7 @@
             ElseIf stringVariant = "infoProfileSaved" Then
                 Return "Profile was saved."
             ElseIf stringVariant = "infoSettingsSaved" Then
-                Return "Settings were saved."
+                Return "Settings were saved. You may need to restart the application for changes to take effect."
             Else
                 'If the input string variant is invalid, output error string
                 Return "errorInvalidStringVariant"
@@ -82,7 +82,7 @@
             ElseIf stringVariant = "infoProfileSaved" Then
                 Return "Profil wurde gespeichert."
             ElseIf stringVariant = "infoSettingsSaved" Then
-                Return "Einstellungen wurden gespeichert."
+                Return "Einstellungen wurden gespeichert. Du musst die App möglicherweise neustarten, um die Änderungen anzuwenden."
             Else
                 'If the input string variant is invalid, output error string
                 Return "errorInvalidStringVariant"

@@ -46,6 +46,7 @@ Public Class frmProfileEditor
     Private Sub frmProfileEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load translations
         LoadTranslations()
+        LoadDesign()
 
         'Reset the combobox and selected options
         cbxProfile.Items.Clear()
@@ -216,6 +217,22 @@ Public Class frmProfileEditor
             btnDelete.Text = "Profil löschen"
             btnClose.Text = "Schließen"
             Text = "Profil Editor"
+        End If
+    End Sub
+
+    Private Sub LoadDesign()
+        If frmMain.Design = "Dark" Then
+            'Switch all components to dark mode. Note that you will need to change the button design yourself.
+            BackColor = Color.FromArgb(41, 41, 41)
+            lblChooseProfile.ForeColor = Color.White
+            gbEditProfile.ForeColor = Color.White
+            rbtn1s.ForeColor = Color.White
+            rbtn2s.ForeColor = Color.White
+            rbtn3s.ForeColor = Color.White
+            cb1s.ForeColor = Color.White
+            cb2s.ForeColor = Color.White
+            tb1s.BackColor = Color.Gray
+            tb1s.ForeColor = Color.White
         End If
     End Sub
 End Class

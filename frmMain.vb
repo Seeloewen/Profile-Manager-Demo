@@ -1,4 +1,5 @@
 ﻿Imports System.Environment
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock
 
 Public Class frmMain
 
@@ -8,12 +9,15 @@ Public Class frmMain
     Dim ProfileList As String()
     Dim messageboxStrings As New messageboxStrings
     Public Language As String = "English" 'This variable is used for the language across the software. You should replace this with your own translation system
+    Public Design As String = "Light" 'This variable is used for the language across the software. You should replace this with your own translation system
 
     '-- Event handlers --
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load language
         Language = My.Settings.Language
+        Design = GetDesign()
         LoadTranslations()
+        LoadDesign()
 
         'Check if profile directory exists, if not, create it
         If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) = False Then
@@ -75,6 +79,45 @@ Public Class frmMain
             btnLoadProfile.Text = "Profil laden"
             btnOpenProfileEditor.Text = "Profil Editor öffnen"
             btnSettings.Text = "Einstellungen"
+        End If
+    End Sub
+
+    Public Function GetDesign() As String
+        'If the 'System Default' option is checked, it has to check the OS for the design
+        If My.Settings.Design = "System Default" Then
+            'Check the registry key for Windows App Design to get current design
+            Dim registryKey As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", True)
+            If registryKey IsNot Nothing Then
+                Dim value As Object = registryKey.GetValue("AppsUseLightTheme")
+                If value IsNot Nothing AndAlso TypeOf value Is Integer Then
+                    If CInt(value) = 0 Then 'Dark design
+                        Return "Dark"
+                    Else 'Light design
+                        Return "Light"
+                    End If
+                End If
+            End If
+        Else
+            'If not, it can just use the settings string
+            Return My.Settings.Design
+        End If
+
+        'If everything fails, use 'light' as fallback design
+        Return "Light"
+    End Function
+
+    Private Sub LoadDesign()
+        If Design = "Dark" Then
+            'Switch all components to dark mode. Note that you will need to change the button design yourself.
+            BackColor = Color.FromArgb(41, 41, 41)
+            gbProfileDemo.ForeColor = Color.White
+            rbtn1.ForeColor = Color.White
+            rbtn2.ForeColor = Color.White
+            rbtn3.ForeColor = Color.White
+            cb1.ForeColor = Color.White
+            cb2.ForeColor = Color.White
+            tb1.BackColor = Color.Gray
+            tb1.ForeColor = Color.White
         End If
     End Sub
 End Class

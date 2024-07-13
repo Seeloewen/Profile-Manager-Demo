@@ -20,6 +20,7 @@ Public Class frmLoadProfileFrom
     Private Sub frmLoadProfileFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load translations
         LoadTranslations()
+        LoadDesign()
 
         'Checks if the profile directory exists. If yes, it clears the combobox to avoid duplicates and it starts getting all available profiles, see method below
         If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
@@ -87,21 +88,21 @@ Public Class frmLoadProfileFrom
         If (String.IsNullOrEmpty(ProfileContent(0)) OrElse String.IsNullOrEmpty(ProfileContent(1)) OrElse String.IsNullOrEmpty(ProfileContent(2)) OrElse String.IsNullOrEmpty(3)) Then
             Select Case MsgBox(messageboxStrings.returnMessageboxString("questionLoadOldOrCorruptedProfile", frmMain.Language), vbQuestion + vbYesNo, "Load old or corrupted profile")
                 Case Windows.Forms.DialogResult.Yes
-            If String.IsNullOrEmpty(ProfileContent(0)) Then
-                ProfileContent(0) = "rbtn1"
-            End If
-            If String.IsNullOrEmpty(ProfileContent(1)) Then
-                ProfileContent(1) = "cb1Checked"
-            End If
-            If String.IsNullOrEmpty(ProfileContent(2)) Then
-                ProfileContent(2) = "cb2NotChecked"
-            End If
-            If String.IsNullOrEmpty(ProfileContent(3)) Then
-                ProfileContent(3) = "Placeholder"
-            End If
-            LoadProfile(Profile, False)
-            frmSaveProfileAs.UpdateProfile(Profile)
-            MsgBox(messageboxStrings.returnMessageboxString("infoLoadedAndUpdatedProfile", frmMain.Language), MsgBoxStyle.Information, "Loaded And updated profile")
+                    If String.IsNullOrEmpty(ProfileContent(0)) Then
+                        ProfileContent(0) = "rbtn1"
+                    End If
+                    If String.IsNullOrEmpty(ProfileContent(1)) Then
+                        ProfileContent(1) = "cb1Checked"
+                    End If
+                    If String.IsNullOrEmpty(ProfileContent(2)) Then
+                        ProfileContent(2) = "cb2NotChecked"
+                    End If
+                    If String.IsNullOrEmpty(ProfileContent(3)) Then
+                        ProfileContent(3) = "Placeholder"
+                    End If
+                    LoadProfile(Profile, False)
+                    frmSaveProfileAs.UpdateProfile(Profile)
+                    MsgBox(messageboxStrings.returnMessageboxString("infoLoadedAndUpdatedProfile", frmMain.Language), MsgBoxStyle.Information, "Loaded And updated profile")
                 Case Windows.Forms.DialogResult.No
                     MsgBox(messageboxStrings.returnMessageboxString("infoCancelledLoadingProfiles", frmMain.Language), MsgBoxStyle.Exclamation, "Warning")
             End Select
@@ -151,6 +152,14 @@ Public Class frmLoadProfileFrom
             btnLoad.Text = "Laden"
             btnCancel.Text = "Schließen"
             Text = "Profil laden von..."
+        End If
+    End Sub
+
+    Private Sub LoadDesign()
+        If frmMain.Design = "Dark" Then
+            'Switch all components to dark mode. Note that you will need to change the button design yourself.
+            BackColor = Color.FromArgb(41, 41, 41)
+            lblLoadProfileFrom.ForeColor = Color.White
         End If
     End Sub
 End Class

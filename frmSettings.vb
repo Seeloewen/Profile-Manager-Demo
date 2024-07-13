@@ -14,12 +14,29 @@ Public Class frmSettings
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load translations
         LoadTranslations()
+        LoadDesign()
 
         'Check checkbox depending on default profile setting
         If My.Settings.LoadProfileByDefault Then
             cbLoadProfileByDefault.Checked = True
         ElseIf My.Settings.LoadProfileByDefault = False Then
             cbLoadProfileByDefault.Checked = False
+        End If
+
+        'Check checkbox depending on language setting
+        If My.Settings.Language = "German" Then
+            cbxLanguage.SelectedIndex = 0
+        ElseIf My.Settings.Language = "English" Then
+            cbxLanguage.SelectedIndex = 1
+        End If
+
+        'Check checkbox depending on design setting
+        If My.Settings.Design = "System Default" Then
+            cbxDesign.SelectedIndex = 0
+        ElseIf My.Settings.Design = "Dark" Then
+            cbxDesign.SelectedIndex = 1
+        ElseIf My.Settings.Design = "Light" Then
+            cbxDesign.SelectedIndex = 2
         End If
 
         'Clear profile list and get profile list for default profile combobox
@@ -46,26 +63,30 @@ Public Class frmSettings
         'Change default profile to combobox selection
         My.Settings.DefaultProfile = cbxDefaultProfile.SelectedItem
 
+        'Change language based on selection
+        If cbxLanguage.SelectedIndex = 0 Then
+            frmMain.Language = "German"
+            My.Settings.Language = "German"
+        ElseIf cbxLanguage.SelectedIndex = 1 Then
+            frmMain.Language = "English"
+            My.Settings.Language = "English"
+        End If
+
+        'Change design based on selection
+        If cbxDesign.SelectedIndex = 0 Then
+            frmMain.Design = frmMain.GetDesign()
+            My.Settings.Design = "System Default"
+        ElseIf cbxDesign.SelectedIndex = 1 Then
+            frmMain.Design = "Dark"
+            My.Settings.Design = "Dark"
+        ElseIf cbxDesign.SelectedIndex = 2 Then
+            frmMain.Design = "Light"
+            My.Settings.Design = "Light"
+        End If
+
         'Show messagebox to confirm save and close settings
         MsgBox(messageboxStrings.returnMessageboxString("infoSettingsSaved", frmMain.Language), MsgBoxStyle.Information, "Saved settings")
         Close()
-    End Sub
-
-    Private Sub btnToggleLanguage_Click(sender As Object, e As EventArgs) Handles btnToggleLanguage.Click
-        'Toggle language in the software. Please note that you should remove this from your software when implementing and use your own language selector.
-        If frmMain.Language = "German" Then
-            frmMain.Language = "English"
-        ElseIf frmMain.Language = "English" Then
-            frmMain.Language = "German"
-        End If
-        My.Settings.Language = frmMain.Language
-
-        'Show confirmation message. This string is not contained in the messageboxStrings file as it should be removed.
-        If frmMain.Language = "German" Then
-            MsgBox("Toggled language. Please restart the application for this to take effect.", MsgBoxStyle.Information, "Toggled language")
-        ElseIf frmMain.Language = "English" Then
-            MsgBox("Sprache geändert. Bitte starte die App neu, damit die Einstellungen angewandt werden.", MsgBoxStyle.Information, "Sprache geändert")
-        End If
     End Sub
 
     '-- Custom Methods --
@@ -94,13 +115,35 @@ Public Class frmSettings
     End Sub
 
     Private Sub LoadTranslations()
-        'Load German translations
         If frmMain.Language = "German" Then
+            'Load German translations
             cbLoadProfileByDefault.Text = "Profil standartmäßig laden:"
             btnSave.Text = "Speichern"
             btnCancel.Text = "Abbrechen"
-            btnToggleLanguage.Text = "Sprache ändern"
             Text = "Einstellungen"
+            lblDesign.Text = "Aussehen"
+            lblLanguage.Text = "Sprache"
+            cbxDesign.Items.Clear()
+            cbxDesign.Items.Add("Systemstandard")
+            cbxDesign.Items.Add("Dunkel")
+            cbxDesign.Items.Add("Hell")
+        ElseIf frmMain.Language = "English" Then
+            'Load English translations
+            cbxDesign.Items.Clear()
+            cbxDesign.Items.Add("System Default")
+            cbxDesign.Items.Add("Dark")
+            cbxDesign.Items.Add("Light")
+        End If
+    End Sub
+
+    Private Sub LoadDesign()
+        If frmMain.Design = "Dark" Then
+            'Switch all components to dark mode. Note that you will need to change the button design yourself.
+            BackColor = Color.FromArgb(41, 41, 41)
+            cbLoadProfileByDefault.ForeColor = Color.White
+            lblLanguage.ForeColor = Color.White
+            lblDesign.ForeColor = Color.White
+            cbLoadProfileByDefault.ForeColor = Color.White
         End If
     End Sub
 End Class

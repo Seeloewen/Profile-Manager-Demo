@@ -13,6 +13,7 @@
     Private Sub frmSaveProfileAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load translations
         LoadTranslations()
+        LoadDesign()
 
         'Clear profile name textbox
         tbSaveProfileAs.Clear()
@@ -134,6 +135,16 @@
             btnSave.Text = "Speichern"
             btnCancel.Text = "Abbrechen"
             Text = "Profil speichern als..."
+        End If
+    End Sub
+
+    Private Sub LoadDesign()
+        If frmMain.Design = "Dark" Then
+            'Switch all components to dark mode. Note that you will need to change the button design yourself.
+            BackColor = Color.FromArgb(41, 41, 41)
+            lblSaveProfileAs.ForeColor = Color.White
+            tbSaveProfileAs.ForeColor = Color.White
+            tbSaveProfileAs.BackColor = Color.Gray
         End If
     End Sub
 End Class
