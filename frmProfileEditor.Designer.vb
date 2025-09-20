@@ -35,6 +35,7 @@ Partial Class frmProfileEditor
         Me.lblChooseProfile = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.settings = New System.Windows.Forms.RichTextBox()
+        Me.btnRename = New System.Windows.Forms.Button()
         Me.gbEditProfile.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -158,9 +159,9 @@ Partial Class frmProfileEditor
         'btnClose
         '
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(84, 239)
+        Me.btnClose.Location = New System.Drawing.Point(147, 239)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(126, 23)
+        Me.btnClose.Size = New System.Drawing.Size(130, 23)
         Me.btnClose.TabIndex = 11
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -173,12 +174,23 @@ Partial Class frmProfileEditor
         Me.settings.TabIndex = 12
         Me.settings.Text = ""
         '
+        'btnRename
+        '
+        Me.btnRename.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRename.Location = New System.Drawing.Point(11, 239)
+        Me.btnRename.Name = "btnRename"
+        Me.btnRename.Size = New System.Drawing.Size(130, 23)
+        Me.btnRename.TabIndex = 13
+        Me.btnRename.Text = "Rename Profile"
+        Me.btnRename.UseVisualStyleBackColor = True
+        '
         'frmProfileEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(290, 272)
+        Me.Controls.Add(Me.btnRename)
         Me.Controls.Add(Me.settings)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.lblChooseProfile)
@@ -212,4 +224,5 @@ Partial Class frmProfileEditor
     Friend WithEvents lblChooseProfile As Label
     Friend WithEvents btnClose As Button
     Friend WithEvents settings As RichTextBox
+    Friend WithEvents btnRename As Button
 End Class

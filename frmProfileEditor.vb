@@ -16,6 +16,13 @@ Public Class frmProfileEditor
 
 
     '-- Event Handlers --
+    Private Sub btnRename_Click(sender As Object, e As EventArgs) Handles btnRename.Click
+        If Not String.IsNullOrEmpty(cbxProfile.SelectedItem) Then
+            frmRenameProfile.ShowWindow(cbxProfile.SelectedItem)
+        Else
+            MsgBox(messageboxStrings.returnMessageboxString("errorProfileDoesNotExist", frmMain.Language), MsgBoxStyle.Critical, "Error")
+        End If
+    End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         'Begin overwriting and saving the selected profile
@@ -216,6 +223,7 @@ Public Class frmProfileEditor
             btnSave.Text = "Änderungen speichern"
             btnDelete.Text = "Profil löschen"
             btnClose.Text = "Schließen"
+            btnRename.Text = "Profil umbenennen"
             Text = "Profil Editor"
         End If
     End Sub
