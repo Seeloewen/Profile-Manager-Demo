@@ -218,7 +218,7 @@ Public Class frmProfileEditor
             rbtn3s.Text = "Option 3"
             cb1s.Text = "Box 1"
             cb2s.Text = "Box 2"
-            btnSave.Text = "Änderungen speichern"
+            btnSave.Text = "Profil speichern"
             btnDelete.Text = "Profil löschen"
             btnClose.Text = "Schließen"
             btnRename.Text = "Profil umbenennen"
