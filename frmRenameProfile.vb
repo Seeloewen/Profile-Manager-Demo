@@ -2,7 +2,6 @@
 
 Public Class frmRenameProfile
 
-    Private messageboxStrings As New messageboxStrings
     Private targetProfile As String
 
     Public Sub ShowWindow(targetProfile As String) 'Should be used so the targetProfile arg can be passed
@@ -14,21 +13,21 @@ Public Class frmRenameProfile
         'Rename profile by "moving" it, if the profile and new name are valid
         If Not String.IsNullOrEmpty(newName) And Not String.IsNullOrEmpty(targetProfile) Then
             Try
-                File.Move($"{frmMain.ProfileDirectory}{targetProfile}.txt", $"{frmMain.ProfileDirectory}{newName}.txt")
-                MsgBox(messageboxStrings.returnMessageboxString("infoUpdatedSelectedProfile", frmMain.Language), MsgBoxStyle.Information, "Success")
+                File.Move($"{frmMain.profileDirectory}{targetProfile}.txt", $"{frmMain.profileDirectory}{newName}.txt")
+                MsgBox(GetString("infoUpdatedSelectedProfile", frmMain.language), MsgBoxStyle.Information, "Success")
                 Close()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
             End Try
 
         Else
-            MsgBox(messageboxStrings.returnMessageboxString("errorProfileNameIsEmpty", frmMain.Language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
     Private Sub LoadTranslations()
         'Load German translations
-        If frmMain.Language = "German" Then
+        If frmMain.language = "German" Then
             lblRenameProfileTo.Text = "Profil umbenennen zu..."
             btnRename.Text = "Umbenennen"
             btnCancel.Text = "Abbrechen"
@@ -37,7 +36,7 @@ Public Class frmRenameProfile
     End Sub
 
     Private Sub LoadDesign()
-        If frmMain.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             'Switch all components to dark mode. Note that you will need to change the button design yourself.
             BackColor = Color.FromArgb(41, 41, 41)
             lblRenameProfileTo.ForeColor = Color.White

@@ -1,43 +1,45 @@
 ﻿Imports System.Environment
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock
+Imports System.IO
+Imports Microsoft.Win32
+Imports System.Globalization
 
 Public Class frmMain
 
     'Variables used by the software to work correctly
-    Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public ProfileDirectory As String = AppData + "\Profile Manager Demo\Profiles\"
-    Dim ProfileList As String()
-    Dim messageboxStrings As New messageboxStrings
-    Public Language As String = "English" 'This variable is used for the language across the software. You should replace this with your own translation system
-    Public Design As String = "Light" 'This variable is used for the language across the software. You should replace this with your own translation system
+    Public Shared appData As String = GetFolderPath(SpecialFolder.ApplicationData)
+    Public Shared language As String = "English" 'This variable is used for the language across the software. You should replace this with your own translation system
+    Public Shared design As String = "Light" 'This variable is used for the language across the software. You should replace this with your own translation system
+
+    Public profileDirectory As String = $"{appData}\Profile Manager Demo\Profiles\"
+    Private profileList As String()
 
     '-- Event handlers --
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load language
-        Language = GetLanguage()
-        Design = GetDesign()
+        language = GetLanguage()
+        design = GetDesign()
         LoadTranslations()
         LoadDesign()
 
         'Check if profile directory exists, if not, create it
-        If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) = False Then
-            My.Computer.FileSystem.CreateDirectory(ProfileDirectory)
+        If Not Directory.Exists(profileDirectory) Then
+            Directory.CreateDirectory(profileDirectory)
         End If
 
         'If default profile setting is set to true, try to load default profile. If not possible, it will disable default profile setting.
         If My.Settings.LoadProfileByDefault = True Then
             frmSettings.cbLoadProfileByDefault.Checked = True
             If String.IsNullOrEmpty(My.Settings.DefaultProfile) = False Then
-                If My.Computer.FileSystem.FileExists(ProfileDirectory + My.Settings.DefaultProfile + ".txt") Then
+                If My.Computer.FileSystem.FileExists(profileDirectory + My.Settings.DefaultProfile + ".txt") Then
                     frmSettings.cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
                     frmLoadProfileFrom.InitializeLoadingProfile(My.Settings.DefaultProfile, False)
                 Else
-                    MsgBox(messageboxStrings.returnMessageboxString("errorDefaultProfileNoLongerExists", Language), MsgBoxStyle.Critical, "Error")
+                    MsgBox(GetString("errorDefaultProfileNoLongerExists", language), MsgBoxStyle.Critical, "Error")
                     frmSettings.cbLoadProfileByDefault.Checked = False
                     My.Settings.LoadProfileByDefault = False
                 End If
             Else
-                MsgBox(messageboxStrings.returnMessageboxString("errorDefaultProfileEmpty", Language), MsgBoxStyle.Critical, "Error")
+                MsgBox(GetString("errorDefaultProfileEmpty", language), MsgBoxStyle.Critical, "Error")
                 frmSettings.cbLoadProfileByDefault.Checked = False
                 My.Settings.LoadProfileByDefault = False
             End If
@@ -68,7 +70,7 @@ Public Class frmMain
 
     Private Sub LoadTranslations()
         'Load German translations
-        If Language = "German" Then
+        If language = "German" Then
             gbProfileDemo.Text = "Profil Demo"
             rbtn1.Text = "Option 1"
             rbtn2.Text = "Option 2"
@@ -86,7 +88,7 @@ Public Class frmMain
         'If the 'System Default' option is checked, it has to check the OS for the design
         If My.Settings.Design = "System Default" Then
             'Check the registry key for Windows App Design to get current design
-            Dim registryKey As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", True)
+            Dim registryKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", True)
             If registryKey IsNot Nothing Then
                 Dim value As Object = registryKey.GetValue("AppsUseLightTheme")
                 If value IsNot Nothing AndAlso TypeOf value Is Integer Then
@@ -110,7 +112,7 @@ Public Class frmMain
         'If the 'System Default' option is checked, it has to check the OS for the design
         If My.Settings.Language = "System Default" Then
             'Check registry key for Windows System Language to get current language
-            Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InstalledUICulture
+            Dim culture As CultureInfo = CultureInfo.InstalledUICulture
             Dim lang As String = culture.TwoLetterISOLanguageName
             If lang = "en" Then
                 Return "English"
@@ -128,7 +130,7 @@ Public Class frmMain
 
 
     Private Sub LoadDesign()
-        If Design = "Dark" Then
+        If design = "Dark" Then
             'Switch all components to dark mode. Note that you will need to change the button design yourself.
             BackColor = Color.FromArgb(41, 41, 41)
             gbProfileDemo.ForeColor = Color.White

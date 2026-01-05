@@ -1,8 +1,4 @@
 ﻿Public Class frmSaveProfileAs
-
-    'Variables used by the software to work correctly
-    Dim messageboxStrings As New messageboxStrings
-
     'Variables that store profile content
     Dim rbtn As String
     Dim cb1 As String
@@ -31,7 +27,7 @@
 
     '-- Custom Methods --
 
-    Public Sub SaveProfile(ProfileName)
+    Public Sub SaveProfile(profileName)
         'Set which radiobutton is selected
         If frmMain.rbtn1.Checked Then
             rbtn = "rbtn1"
@@ -63,31 +59,31 @@
         'Saves the profile. It checks if the profile already exists or not. If it exists, it will show a warning, otherwise it will not.
         'It will then create a text file with the name set in ProfileName and write the content of the variable to the file.
         'It will show an error if ProfileName is empty or ProfileDirectory doesn't exist.
-        If String.IsNullOrEmpty(ProfileName) = False Then
-            If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
-                If My.Computer.FileSystem.FileExists(frmMain.ProfileDirectory + ProfileName + ".txt") Then
-                    Select Case MsgBox(messageboxStrings.returnMessageboxString("questionProfileNameAlreadyExists", frmMain.Language), vbQuestion + vbYesNo, "Profile already exists")
+        If String.IsNullOrEmpty(profileName) = False Then
+            If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
+                If My.Computer.FileSystem.FileExists(frmMain.profileDirectory + profileName + ".txt") Then
+                    Select Case MsgBox(GetString("questionProfileNameAlreadyExists", frmMain.language), vbQuestion + vbYesNo, "Profile already exists")
                         Case Windows.Forms.DialogResult.Yes
-                            My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
-                            MsgBox(messageboxStrings.returnMessageboxString("infoProfileOverwrittenAndSaved", frmMain.Language), MsgBoxStyle.Information, "Overwritten and saved")
+                            My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
+                            MsgBox(GetString("infoProfileOverwrittenAndSaved", frmMain.language), MsgBoxStyle.Information, "Overwritten and saved")
                             Close()
                         Case Windows.Forms.DialogResult.No
-                            MsgBox(messageboxStrings.returnMessageboxString("infoProfileNotOverwritten", frmMain.Language), MsgBoxStyle.Exclamation, "Profile Not overwritten.")
+                            MsgBox(GetString("infoProfileNotOverwritten", frmMain.language), MsgBoxStyle.Exclamation, "Profile Not overwritten.")
                     End Select
                 Else
-                    My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
-                    MsgBox(messageboxStrings.returnMessageboxString("infoProfileSaved", frmMain.Language), MsgBoxStyle.Information, "Saved")
+                    My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
+                    MsgBox(GetString("infoProfileSaved", frmMain.language), MsgBoxStyle.Information, "Saved")
                     Close()
                 End If
             Else
-                MsgBox(messageboxStrings.returnMessageboxString("errorProfileDirectoryDoesNotExist", frmMain.Language), MsgBoxStyle.Critical, "Error")
+                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, "Error")
             End If
         Else
-            MsgBox(messageboxStrings.returnMessageboxString("errorProfileNameIsEmpty", frmMain.Language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
-    Public Sub UpdateProfile(ProfileName)
+    Public Sub UpdateProfile(profileName)
         'Set which radiobutton is selected
         If frmMain.rbtn1.Checked Then
             rbtn = "rbtn1"
@@ -117,20 +113,20 @@
         End If
 
         'Update the selected profile. This will save and overwrite the selected profile without showing any warning or message. Used if a profile is old or corrupted.
-        If String.IsNullOrEmpty(ProfileName) = False Then
-            If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
-                My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
+        If String.IsNullOrEmpty(profileName) = False Then
+            If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
+                My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
             Else
-                MsgBox(messageboxStrings.returnMessageboxString("errorProfileDirectoryDoesNotExist", frmMain.Language), MsgBoxStyle.Critical, "Error")
+                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, "Error")
             End If
         Else
-            MsgBox(messageboxStrings.returnMessageboxString("errorCouldntUpdateEmptyProfileName", frmMain.Language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorCouldntUpdateEmptyProfileName", frmMain.language), MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
     Private Sub LoadTranslations()
         'Load German translations
-        If frmMain.Language = "German" Then
+        If frmMain.language = "German" Then
             lblSaveProfileAs.Text = "Profil speichern als..."
             btnSave.Text = "Speichern"
             btnCancel.Text = "Abbrechen"
@@ -139,7 +135,7 @@
     End Sub
 
     Private Sub LoadDesign()
-        If frmMain.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             'Switch all components to dark mode. Note that you will need to change the button design yourself.
             BackColor = Color.FromArgb(41, 41, 41)
             lblSaveProfileAs.ForeColor = Color.White

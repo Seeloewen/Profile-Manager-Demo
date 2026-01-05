@@ -5,9 +5,7 @@
 Public Class frmSettings
 
     'Variables used by the application to work correctly
-    Dim ProfileDirectory As String = frmMain.AppData + "\Profile Manager Demo\Profiles\" 'This is the directory, where the profile files are being stored
-    Dim ProfileList As String()
-    Dim messageboxStrings As New messageboxStrings
+    Private ProfileList As String()
 
     '-- Event Handlers --
 
@@ -17,11 +15,7 @@ Public Class frmSettings
         LoadDesign()
 
         'Check checkbox depending on default profile setting
-        If My.Settings.LoadProfileByDefault Then
-            cbLoadProfileByDefault.Checked = True
-        ElseIf My.Settings.LoadProfileByDefault = False Then
-            cbLoadProfileByDefault.Checked = False
-        End If
+        cbLoadProfileByDefault.Checked = My.Settings.LoadProfileByDefault
 
         'Check checkbox depending on language setting
         If My.Settings.Language = "System Default" Then
@@ -43,7 +37,7 @@ Public Class frmSettings
 
         'Clear profile list and get profile list for default profile combobox
         cbxDefaultProfile.Items.Clear()
-        GetFiles(ProfileDirectory)
+        GetFiles(frmMain.profileDirectory)
 
         'Load default profile
         cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
@@ -67,60 +61,59 @@ Public Class frmSettings
 
         'Change language based on selection
         If cbxLanguage.SelectedIndex = 0 Then
-            frmMain.Language = frmMain.GetLanguage()
+            frmMain.language = frmMain.GetLanguage()
             My.Settings.Language = "System Default"
         ElseIf cbxLanguage.SelectedIndex = 1 Then
-            frmMain.Language = "German"
+            frmMain.language = "German"
             My.Settings.Language = "German"
         ElseIf cbxLanguage.SelectedIndex = 2 Then
-            frmMain.Language = "English"
+            frmMain.language = "English"
             My.Settings.Language = "English"
         End If
 
         'Change design based on selection
         If cbxDesign.SelectedIndex = 0 Then
-            frmMain.Design = frmMain.GetDesign()
+            frmMain.design = frmMain.GetDesign()
             My.Settings.Design = "System Default"
         ElseIf cbxDesign.SelectedIndex = 1 Then
-            frmMain.Design = "Dark"
+            frmMain.design = "Dark"
             My.Settings.Design = "Dark"
         ElseIf cbxDesign.SelectedIndex = 2 Then
-            frmMain.Design = "Light"
+            frmMain.design = "Light"
             My.Settings.Design = "Light"
         End If
 
         'Show messagebox to confirm save and close settings
-        MsgBox(messageboxStrings.returnMessageboxString("infoSettingsSaved", frmMain.Language), MsgBoxStyle.Information, "Saved settings")
+        MsgBox(GetString("infoSettingsSaved", frmMain.language), MsgBoxStyle.Information, "Saved settings")
         Close()
     End Sub
 
     '-- Custom Methods --
 
-    Sub GetFiles(Path As String)
+    Sub GetFiles(path As String)
         'Gets all the profile files from the directory and puts their name into the combobox
-        If Path.Trim().Length = 0 Then
+        If path.Trim().Length = 0 Then
             Return
         End If
 
-        ProfileList = Directory.GetFileSystemEntries(Path)
+        ProfileList = Directory.GetFileSystemEntries(path)
 
         Try
             For Each Profile As String In ProfileList
                 If Directory.Exists(Profile) Then
                     GetFiles(Profile)
                 Else
-                    Profile = Profile.Replace(ProfileDirectory, "")
-                    Profile = Profile.Replace(".txt", "")
+                    Profile = Profile.Replace(frmMain.profileDirectory, "").Replace(".txt", "")
                     cbxDefaultProfile.Items.Add(Profile)
                 End If
             Next
         Catch ex As Exception
-            MsgBox(messageboxStrings.returnMessageboxString("errorLoadingProfilesFailed", frmMain.Language) + vbNewLine + "Exception: " + ex.Message)
+            MsgBox(GetString("errorLoadingProfilesFailed", frmMain.language) + vbNewLine + "Exception: " + ex.Message)
         End Try
     End Sub
 
     Private Sub LoadTranslations()
-        If frmMain.Language = "German" Then
+        If frmMain.language = "German" Then
             'Load German translations
             cbLoadProfileByDefault.Text = "Profil standartmäßig laden:"
             btnSave.Text = "Speichern"
@@ -132,7 +125,7 @@ Public Class frmSettings
             cbxDesign.Items.Add("Systemstandard")
             cbxDesign.Items.Add("Dunkel")
             cbxDesign.Items.Add("Hell")
-        ElseIf frmMain.Language = "English" Then
+        ElseIf frmMain.language = "English" Then
             'Load English translations
             cbxDesign.Items.Clear()
             cbxDesign.Items.Add("System Default")
@@ -142,7 +135,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub LoadDesign()
-        If frmMain.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             'Switch all components to dark mode. Note that you will need to change the button design yourself.
             BackColor = Color.FromArgb(41, 41, 41)
             cbLoadProfileByDefault.ForeColor = Color.White
