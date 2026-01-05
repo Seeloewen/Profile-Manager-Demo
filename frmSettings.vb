@@ -5,7 +5,7 @@
 Public Class frmSettings
 
     'Variables used by the application to work correctly
-    Private ProfileList As String()
+    Private profileList As String()
 
     '-- Event Handlers --
 
@@ -84,7 +84,7 @@ Public Class frmSettings
         End If
 
         'Show messagebox to confirm save and close settings
-        MsgBox(GetString("infoSettingsSaved", frmMain.language), MsgBoxStyle.Information, "Saved settings")
+        MsgBox(GetString("infoSettingsSaved", frmMain.language), MsgBoxStyle.Information, GetString("headerSavedSettings", frmMain.language))
         Close()
     End Sub
 
@@ -96,10 +96,10 @@ Public Class frmSettings
             Return
         End If
 
-        ProfileList = Directory.GetFileSystemEntries(path)
+        profileList = Directory.GetFileSystemEntries(path)
 
         Try
-            For Each Profile As String In ProfileList
+            For Each Profile As String In profileList
                 If Directory.Exists(Profile) Then
                     GetFiles(Profile)
                 Else
@@ -108,7 +108,7 @@ Public Class frmSettings
                 End If
             Next
         Catch ex As Exception
-            MsgBox(GetString("errorLoadingProfilesFailed", frmMain.language) + vbNewLine + "Exception: " + ex.Message)
+            MsgBox(GetString("errorLoadingProfilesFailed", frmMain.language) + vbNewLine + "Exception: " + ex.Message, MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End Try
     End Sub
 

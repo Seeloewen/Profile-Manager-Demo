@@ -20,7 +20,18 @@
         {"infoProfileNotOverwritten", "Profil wurde nicht überschrieben."},
         {"infoProfileSaved", "Profil wurde gespeichert."},
         {"infoSettingsSaved", "Einstellungen wurden gespeichert. Du musst die App möglicherweise neu starten, um die Änderungen anzuwenden."},
-        {"infoProfileLoaded", "Profil wurde geladen."}
+        {"infoProfileLoaded", "Profil wurde geladen."},
+        {"headerError", "Fehler"},
+        {"headerWarning", "Warnung"},
+        {"headerOldOrCorrupted", "Altes oder defektes Profil laden"},
+        {"headerLoadedUpdatedProfile", "Profil geladen und aktualisiert"},
+        {"headerLoadedProfile", "Profil geladen"},
+        {"headerDeleted", "Gelöscht"},
+        {"headerSuccess", "Erfolg"},
+        {"headerAlreadyExists", "Profil existiert bereits"},
+        {"headerOverwrittenSaved", "Überschrieben und gespeichert"},
+        {"headerNotOverwritten", "Profil nicht überschrieben"},
+        {"headerSavedSettings", "Einstellungen gespeichert"}
     }
 
     Private stringsEnglish As Dictionary(Of String, String) = New Dictionary(Of String, String) From
@@ -43,7 +54,18 @@
         {"infoProfileNotOverwritten", "Profile was not overwritten."},
         {"infoProfileSaved", "Profile was saved."},
         {"infoSettingsSaved", "Settings were saved. You may need to restart the application for changes to take effect."},
-        {"infoProfileLoaded", "Profile was loaded."}
+        {"infoProfileLoaded", "Profile was loaded."},
+        {"headerError", "Error"},
+        {"headerWarning", "Warning"},
+        {"headerOldOrCorrupted", "Load old or corrupted profile"},
+        {"headerLoadedUpdatedProfile", "Loaded and updated profile"},
+        {"headerLoadedProfile", "Loaded profile"},
+        {"headerDeleted", "Deleted"},
+        {"headerSuccess", "Success"},
+        {"headerAlreadyExists", "Profile already exists"},
+        {"headerOverwrittenSaved", "Overwritten and saved"},
+        {"headerNotOverwritten", "Profile not overwritten"},
+        {"headerSavedSettings", "Saved settings"}
     }
 
     Public Function GetString(id As String, language As String) As String 'This function return the messagebox string for a specific case and language

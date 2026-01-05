@@ -62,13 +62,13 @@
         If String.IsNullOrEmpty(profileName) = False Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
                 If My.Computer.FileSystem.FileExists(frmMain.profileDirectory + profileName + ".txt") Then
-                    Select Case MsgBox(GetString("questionProfileNameAlreadyExists", frmMain.language), vbQuestion + vbYesNo, "Profile already exists")
+                    Select Case MsgBox(GetString("questionProfileNameAlreadyExists", frmMain.language), vbQuestion + vbYesNo, GetString("headerAlreadyExists", frmMain.language))
                         Case Windows.Forms.DialogResult.Yes
                             My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
-                            MsgBox(GetString("infoProfileOverwrittenAndSaved", frmMain.language), MsgBoxStyle.Information, "Overwritten and saved")
+                            MsgBox(GetString("infoProfileOverwrittenAndSaved", frmMain.language), MsgBoxStyle.Information, GetString("headerOverwrittenSaved", frmMain.language))
                             Close()
                         Case Windows.Forms.DialogResult.No
-                            MsgBox(GetString("infoProfileNotOverwritten", frmMain.language), MsgBoxStyle.Exclamation, "Profile Not overwritten.")
+                            MsgBox(GetString("infoProfileNotOverwritten", frmMain.language), MsgBoxStyle.Exclamation, GetString("headerNotOverwritten", frmMain.language))
                     End Select
                 Else
                     My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
@@ -76,10 +76,10 @@
                     Close()
                 End If
             Else
-                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, "Error")
+                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
             End If
         Else
-            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End If
     End Sub
 
@@ -117,10 +117,10 @@
             If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
                 My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
             Else
-                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, "Error")
+                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
             End If
         Else
-            MsgBox(GetString("errorCouldntUpdateEmptyProfileName", frmMain.language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorCouldntUpdateEmptyProfileName", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End If
     End Sub
 

@@ -19,7 +19,7 @@ Public Class frmProfileEditor
         If Not String.IsNullOrEmpty(cbxProfile.SelectedItem) Then
             frmRenameProfile.ShowWindow(cbxProfile.SelectedItem)
         Else
-            MsgBox(GetString("errorProfileDoesNotExist", frmMain.language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorProfileDoesNotExist", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End If
     End Sub
 
@@ -37,10 +37,10 @@ Public Class frmProfileEditor
         'Delete the currently selected profile if it exists
         If My.Computer.FileSystem.FileExists(frmMain.profileDirectory + cbxProfile.SelectedItem + ".txt") Then
             My.Computer.FileSystem.DeleteFile(frmMain.profileDirectory + cbxProfile.SelectedItem + ".txt")
-            MsgBox(GetString("infoDeletedProfile", frmMain.language), MsgBoxStyle.Information, "Deleted")
+            MsgBox(GetString("infoDeletedProfile", frmMain.language), MsgBoxStyle.Information, GetString("headerDeleted", frmMain.language))
             cbxProfile.Items.Remove(cbxProfile.SelectedItem)
         Else
-            MsgBox(GetString("errorProfileDoesNotExist", frmMain.language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorProfileDoesNotExist", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End If
     End Sub
 
@@ -99,12 +99,12 @@ Public Class frmProfileEditor
         If String.IsNullOrEmpty(profileName) = False Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
                 My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", rbtn + vbNewLine + cb1 + vbNewLine + cb2 + vbNewLine + tb1, False)
-                MsgBox(GetString("infoUpdatedSelectedProfile", frmMain.language), MsgBoxStyle.Information, "Success")
+                MsgBox(GetString("infoUpdatedSelectedProfile", frmMain.language), MsgBoxStyle.Information, GetString("headerSuccess", frmMain.language))
             Else
-                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, "Error")
+                MsgBox(GetString("errorProfileDirectoryDoesNotExist", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
             End If
         Else
-            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End If
     End Sub
 
@@ -126,7 +126,7 @@ Public Class frmProfileEditor
                 End If
             Next
         Catch ex As Exception
-            MsgBox(GetString("errorLoadingProfilesFailed", frmMain.language) + vbNewLine + "Exception: " + ex.Message)
+            MsgBox(GetString("errorLoadingProfilesFailed", frmMain.language) + vbNewLine + "Exception: " + ex.Message, MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End Try
     End Sub
 
@@ -139,7 +139,7 @@ Public Class frmProfileEditor
             ReDim Preserve profileContent(4)
             CheckAndConvertProfile(profile, showMessage)
         Else
-            MsgBox(GetString("errorNoProfileSelected", frmMain.language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorNoProfileSelected", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End If
     End Sub
 
@@ -149,7 +149,7 @@ Public Class frmProfileEditor
         'If a line is empty, it will fill that line with a placeholder in the array so the profile can get loaded without errors. After loading the profile, it gets automatically saved so the corrupted/old settings file gets fixed.
         'If no required line is empty and the file is fine, it will just load the profile like normal.
         If (String.IsNullOrEmpty(profileContent(0)) OrElse String.IsNullOrEmpty(profileContent(1)) OrElse String.IsNullOrEmpty(profileContent(2)) OrElse String.IsNullOrEmpty(3)) Then
-            Select Case MsgBox(GetString("questionLoadOldOrCorruptedProfile", frmMain.language), vbQuestion + vbYesNo, "Load old or corrupted profile")
+            Select Case MsgBox(GetString("questionLoadOldOrCorruptedProfile", frmMain.language), vbQuestion + vbYesNo, GetString("headerOldOrCorrupted", frmMain.language))
                 Case Windows.Forms.DialogResult.Yes
                     If String.IsNullOrEmpty(profileContent(0)) Then
                         profileContent(0) = "rbtn1"
@@ -165,9 +165,9 @@ Public Class frmProfileEditor
                     End If
                     LoadProfile(profile, False)
                     SaveProfile(profile)
-                    MsgBox(GetString("infoLoadedAndUpdatedProfile", frmMain.language), MsgBoxStyle.Information, "Loaded And updated profile")
+                    MsgBox(GetString("infoLoadedAndUpdatedProfile", frmMain.language), MsgBoxStyle.Information, GetString("headerLoadedUpdatedProfile", frmMain.language))
                 Case Windows.Forms.DialogResult.No
-                    MsgBox(GetString("infoCancelledLoadingProfiles", frmMain.language), MsgBoxStyle.Exclamation, "Warning")
+                    MsgBox(GetString("infoCancelledLoadingProfiles", frmMain.language), MsgBoxStyle.Exclamation, GetString("headerWarning", frmMain.language))
             End Select
         Else
             LoadProfile(profile, showMessage)
@@ -204,7 +204,7 @@ Public Class frmProfileEditor
 
         'If ShowMessage is enabled, it will show a messagebox when loading completes.
         If showMessage Then
-            MsgBox("Loaded profile " + profile + ".", MsgBoxStyle.Information, "Loaded profile")
+            MsgBox(GetString("infoProfileLoaded", frmMain.language), MsgBoxStyle.Information, GetString("headerLoadedProfile", frmMain.language))
         End If
     End Sub
 

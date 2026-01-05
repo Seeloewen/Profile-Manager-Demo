@@ -14,14 +14,14 @@ Public Class frmRenameProfile
         If Not String.IsNullOrEmpty(newName) And Not String.IsNullOrEmpty(targetProfile) Then
             Try
                 File.Move($"{frmMain.profileDirectory}{targetProfile}.txt", $"{frmMain.profileDirectory}{newName}.txt")
-                MsgBox(GetString("infoUpdatedSelectedProfile", frmMain.language), MsgBoxStyle.Information, "Success")
+                MsgBox(GetString("infoUpdatedSelectedProfile", frmMain.language), MsgBoxStyle.Information, GetString("headerSuccess", frmMain.language))
                 Close()
             Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+                MsgBox(ex.Message, MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
             End Try
 
         Else
-            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, "Error")
+            MsgBox(GetString("errorProfileNameIsEmpty", frmMain.language), MsgBoxStyle.Critical, GetString("headerError", frmMain.language))
         End If
     End Sub
 

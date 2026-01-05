@@ -34,12 +34,12 @@ Public Class frmMain
                     frmSettings.cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
                     frmLoadProfileFrom.InitializeLoadingProfile(My.Settings.DefaultProfile, False)
                 Else
-                    MsgBox(GetString("errorDefaultProfileNoLongerExists", language), MsgBoxStyle.Critical, "Error")
+                    MsgBox(GetString("errorDefaultProfileNoLongerExists", language), MsgBoxStyle.Critical, GetString("headerError", language))
                     frmSettings.cbLoadProfileByDefault.Checked = False
                     My.Settings.LoadProfileByDefault = False
                 End If
             Else
-                MsgBox(GetString("errorDefaultProfileEmpty", language), MsgBoxStyle.Critical, "Error")
+                MsgBox(GetString("errorDefaultProfileEmpty", language), MsgBoxStyle.Critical, GetString("headerError", language))
                 frmSettings.cbLoadProfileByDefault.Checked = False
                 My.Settings.LoadProfileByDefault = False
             End If
